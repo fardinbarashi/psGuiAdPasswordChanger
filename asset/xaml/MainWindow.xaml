@@ -64,7 +64,11 @@
             <Image x:Name="ImgLogo" Width="34" Height="34"/>
           </Border>
           <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Password Changer" Foreground="White" FontSize="20" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Password Changer" Foreground="White" FontSize="20" FontWeight="Bold"/>
+              <TextBlock x:Name="TxtVersion" Text="" Foreground="#BFDCF5" FontSize="12" FontWeight="SemiBold"
+                         VerticalAlignment="Bottom" Margin="8,0,0,3" Cursor="Hand"/>
+            </StackPanel>
             <TextBlock x:Name="SubtitleText" Text="Not connected" Foreground="#DCE9F6" FontSize="12"/>
           </StackPanel>
         </StackPanel>
@@ -110,6 +114,52 @@
             <Button x:Name="BtnSearchClear" Grid.Column="2" Content="Back to tree" Style="{StaticResource Ghost}"
                     Margin="6,0,0,0" Visibility="Collapsed"/>
           </Grid>
+
+          <!-- Attribute filter: hides users in the tree that do not match -->
+          <Border DockPanel.Dock="Top" Background="#F7FAFD" BorderBrush="{StaticResource Line}"
+                  BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8">
+            <StackPanel>
+              <TextBlock Text="Filter the tree on AD attributes" FontWeight="SemiBold" Margin="0,0,0,4"/>
+              <TextBlock Foreground="{StaticResource Muted}" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8"
+                         Text="Left box = the AD attribute name, right box = the value it must have. Example: sAMAccountName / Ax*  or  physicalDeliveryOfficeName / Stockholm. Use * for any sequence of characters. Leave the value empty to match every account where the attribute is filled in at all. Empty rows are ignored, and an account must match every row you fill in."/>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="AD attribute" FontSize="11" Foreground="{StaticResource Muted}" Margin="0,0,0,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Value ( wildcard : Ax* )" FontSize="11" Foreground="{StaticResource Muted}" Margin="0,0,0,3"/>
+
+                <TextBox x:Name="TxtAttr1" Grid.Row="1" Grid.Column="0" Padding="6,4" Margin="0,0,0,4"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="=" Margin="8,0,8,4" VerticalAlignment="Center" Foreground="{StaticResource Muted}"/>
+                <TextBox x:Name="TxtVal1"  Grid.Row="1" Grid.Column="2" Padding="6,4" Margin="0,0,0,4"/>
+
+                <TextBox x:Name="TxtAttr2" Grid.Row="2" Grid.Column="0" Padding="6,4" Margin="0,0,0,4"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="=" Margin="8,0,8,4" VerticalAlignment="Center" Foreground="{StaticResource Muted}"/>
+                <TextBox x:Name="TxtVal2"  Grid.Row="2" Grid.Column="2" Padding="6,4" Margin="0,0,0,4"/>
+
+                <TextBox x:Name="TxtAttr3" Grid.Row="3" Grid.Column="0" Padding="6,4"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="=" Margin="8,0,8,0" VerticalAlignment="Center" Foreground="{StaticResource Muted}"/>
+                <TextBox x:Name="TxtVal3"  Grid.Row="3" Grid.Column="2" Padding="6,4"/>
+              </Grid>
+
+              <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="BtnAttrFilter" Content="Apply filter" Margin="0,0,8,0"/>
+                <Button x:Name="BtnAttrClear"  Content="Clear filter" Style="{StaticResource Ghost}"/>
+                <TextBlock x:Name="TxtAttrInfo" VerticalAlignment="Center" Margin="10,0,0,0"
+                           FontSize="11" Foreground="{StaticResource Muted}" TextWrapping="Wrap"
+                           Text="No attribute filter active."/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
 
           <!-- Fill area: OU tree OR search results -->
           <Grid Margin="0,4,0,0">
