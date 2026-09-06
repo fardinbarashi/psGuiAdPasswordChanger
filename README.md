@@ -11,7 +11,8 @@ For best effect run this in the domaincontroller or MGMT server
 ---
 
 ## News
-- Added options if you only want to change account options 1.1
+- Version 1.2 : Added options to filter user based on attributes in the tree.
+- Version 1.1 : Added options if you only want to change account options 
 
 ## Folder layout
 
